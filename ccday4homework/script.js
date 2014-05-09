@@ -94,27 +94,42 @@ var createQA = function () {
 
 //----------- Check the answer and keep score -----------------
 
+var clickCounter = 2;
 var checkAnswerFunc = function (answerId) {
     "use strict";
-    switch (answerId) {
-        case "answer4": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
-            totalCounter++;
-            break;
-        case "answer5": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
-            totalCounter++;
-            break;
-        case "answer11": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
-            totalCounter++;
-            break;
-        case "answer14": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
-            totalCounter++;
-            break;
-        case "answer18": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
-            totalCounter++;
-            break;
-        default: document.getElementById("checkAnswer").innerHTML = "Wrong!";
-            document.getElementById("checkAnswer").style.color = "red";
+    
+    if (questionCounter === clickCounter) {
+        switch (answerId) {
+            case "answer4": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
+                totalCounter++;
+                clickCounter++;
+                document.getElementById(answerId).setAttribute("onclick", "");
+                break;
+            case "answer5": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
+                totalCounter++;
+                clickCounter++;
+                document.getElementById(answerId).setAttribute("onclick", "");
+                break;
+            case "answer11": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
+                totalCounter++;
+                clickCounter++;
+                document.getElementById(answerId).setAttribute("onclick", "");
+                break;
+            case "answer14": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
+                totalCounter++;
+                clickCounter++;
+                document.getElementById(answerId).setAttribute("onclick", "");
+                break;
+            case "answer18": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
+                totalCounter++;
+                clickCounter++;
+                document.getElementById(answerId).setAttribute("onclick", "");
+                break;
+            default: document.getElementById("checkAnswer").innerHTML = "Wrong!";
+                document.getElementById("checkAnswer").style.color = "red";
+                document.getElementById(answerId).setAttribute("onclick", "");
+                clickCounter++;
+        }
     }
-
-
+    else { alert("You have already answered. Click the Next button for the next question");}
 }
