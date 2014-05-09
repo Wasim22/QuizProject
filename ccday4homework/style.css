@@ -36,7 +36,7 @@
     color: black;
     margin-top: 400px;
     font-size: 40px;
-    /*text-align: center;*/
+    text-align: center;
 }
 
 #next {
@@ -54,4 +54,15 @@
 #meter {
     position: fixed;
     margin-top: 40px 20px auto auto;
+}
+
+
+{
+animation-name: myfirst;
+animation-duration: 5s;
+animation-timing-function: linear;
+animation-delay: 2s;
+animation-iteration-count: infinite;
+animation-direction: alternate;
+animation-play-state: running;
 }
