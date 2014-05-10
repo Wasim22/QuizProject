@@ -57,6 +57,7 @@ var createQA = function () {
         document.getElementById("score").innerHTML = "Your score is " + totalCounter + " out of 5."
         document.getElementById("meter").setAttribute("value", totalCounter);
         document.getElementById("meter").style.visibility = "visible";
+        document.getElementById("main").innerHTML += "<img scr='http://4.bp.blogspot.com/-AH2dWG3nI9A/UEcU2FRF4wI/AAAAAAAAC_M/sZC7PdaT6KI/s1600/yay_small.jpg' />";
     }
     
     //reset answer label

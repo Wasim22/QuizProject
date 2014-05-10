@@ -18,7 +18,11 @@
     color: black;
     font-size: 25px;
     margin: 50px auto auto 400px;
+    width: 200px;
+}
 
+.answers:hover {
+    background-color: gold;
 }
 
 #start {
@@ -30,6 +34,13 @@
     font-size: 30px;
     text-align: center;
     padding-top: 12px;
+}
+
+#start:hover {
+    background-color: yellow;
+    outline: solid;
+    outline-color: orange;
+    color: black;
 }
 
 #score {
@@ -49,6 +60,13 @@
     font-size: 30px;
     text-align: center;
     padding-top: 12px;
+}
+
+#next:hover {
+    background-color: yellow;
+    outline: solid;
+    outline-color: orange;
+    color: black;
 }
 
 #meter {
