@@ -57,7 +57,12 @@ var createQA = function () {
         document.getElementById("score").innerHTML = "Your score is " + totalCounter + " out of 5."
         document.getElementById("meter").setAttribute("value", totalCounter);
         document.getElementById("meter").style.visibility = "visible";
-        document.getElementById("main").innerHTML += "<img scr='http://4.bp.blogspot.com/-AH2dWG3nI9A/UEcU2FRF4wI/AAAAAAAAC_M/sZC7PdaT6KI/s1600/yay_small.jpg' />";
+        if (totalCounter > 3) {
+            document.getElementById("img").setAttribute("src", "http://media1.giphy.com/media/HscrwGNPHio2A/giphy.gif");
+        }
+        else {
+            document.getElementById("img").setAttribute("src", "http://www.elle.com/cm/elle/images/3r/Cryinggifs_01_1.gif");
+        }
     }
     
     //reset answer label
