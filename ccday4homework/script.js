@@ -9,57 +9,54 @@ var protoObj = {
 var objQuiz = {};
 objQuiz = Object.create(protoObj);
 objQuiz["q1"] = {
-    question1: "Where is Kyle from?",
-    answer1: "Idaho",
-    answer2: "Utah",
-    answer3: "Florida",
-    answer4: "Washington"
+    question1: "1. What is the capital of Kenya?",
+    answer1: "Chicago",
+    answer2: "Adis Ababa",
+    answer3: "Jakarta",
+    answer4: "Nairobi"
 };
 
 objQuiz.q2 = {
-    question2: "Who is from Idaho?",
-    answer1: "Isaiah",
-    answer2: "Aisha",
-    answer3: "Jamie",
-    answer4: "Andrew"
+    question2: "2. What is the capital of Finland?",
+    answer1: "Helsinki",
+    answer2: "CopenHagen",
+    answer3: "Oslo",
+    answer4: "Stockholm"
 };
 
 objQuiz.q3 = {
-    question3: "Where is Sarah from?",
-    answer1: "New York",
-    answer2: "Utah",
-    answer3: "Florida",
-    answer4: "California"
+    question3: "3. What is the capital of Malaysia?",
+    answer1: "Dhaka",
+    answer2: "Khatmandu",
+    answer3: "Kuala Lampur",
+    answer4: "Manila"
 };
 
 objQuiz.q4 = {
-    question4: "Who is from California?",
-    answer1: "Aisha",
-    answer2: "Andrew",
-    answer3: "Jamie",
-    answer4: "Christi"
+    question4: "4. What is the capital of Poland?",
+    answer1: "Vienna",
+    answer2: "Warsaw",
+    answer3: "Prague",
+    answer4: "Budapest"
 };
 
 objQuiz.q5 = {
-    question5: "Where is Aisha from?",
-    answer1: "Idaho",
-    answer2: "New York",
-    answer3: "Florida",
-    answer4: "Washington"
+    question5: "5. What is the capital of Michigan?",
+    answer1: "Detroit",
+    answer2: "Lansing",
+    answer3: "Grand Rapids",
+    answer4: "Kalamazoo"
 };
 
 
 //----------- Display questions and answers -----------------
 var totalCounter = 0;
-var answerCounter = 1;
+var answerCounter = 0;
 var questionCounter = 0;
 
-var createQA = function (id) {
+var createQA = function () {
     //question counter
     questionCounter++;
-
-    //reset the image
-    document.getElementById("img").setAttribute("src", "");
 
     //The end
     if (questionCounter >= 6) {
@@ -94,7 +91,7 @@ var createQA = function (id) {
 
     //modify question
     document.getElementById("main").innerHTML += "<div id='modifyDiv'></div>";
-    document.getElementById("modifyDiv").innerHTML = "<button id='modifyButton'>Modify the quesion</button>";
+    document.getElementById("modifyDiv").innerHTML = "<button id='modifyButton'>Modify quesion</button>";
     document.getElementById("modifyButton").setAttribute("onclick", "modifyQuestion();");
 
     //hide start button
@@ -115,12 +112,13 @@ var createQA = function (id) {
 
     //create answers
     for (var i = 1; i < 5; i++) {
+        answerCounter++;
         document.getElementById("answerSet").innerHTML += "<p id='x'></p>";
         document.getElementById("x").setAttribute("class", "answers");
         document.getElementById("x").setAttribute("onclick", "checkAnswerFunc(this.id);");
         document.getElementById("x").setAttribute("id", ("answer" + answerCounter));
         document.getElementById("answer" + answerCounter).innerHTML = objQuiz["q" + questionCounter]["answer" + i];
-        answerCounter++;
+        
     }
            
 }
@@ -132,6 +130,12 @@ var previous = function () {
     //question counter goes down
     questionCounter--;
 
+    //hide it on the first question
+    if (questionCounter < 2)
+        document.getElementById("previous").style.display = "hidden";
+    else
+        document.getElementById("previous").style.visibility = "visible";
+
     //create question div
     document.getElementById("main").innerHTML = "<div id='x'></div>";
     document.getElementById("x").setAttribute("class", "question");
@@ -140,15 +144,30 @@ var previous = function () {
     //insert question
     document.getElementById("question" + questionCounter).innerHTML = objQuiz["q" + questionCounter]["question" + questionCounter];
 
+    //AUTHOR name
+    document.getElementById("question" + questionCounter).innerHTML += "<span id='author'></span>"
+    document.getElementById("author").innerHTML = "Author: " + objQuiz["Author"];
+
+    //modify question
+    document.getElementById("main").innerHTML += "<div id='modifyDiv'></div>";
+    document.getElementById("modifyDiv").innerHTML = "<button id='modifyButton'>Modify quesion</button>";
+    document.getElementById("modifyButton").setAttribute("onclick", "modifyQuestion();");
+
+    // create answers div
+    document.getElementById("main").innerHTML += "<div id='x'></div>";
+    document.getElementById("x").setAttribute("class", "answerSet");
+    document.getElementById("x").setAttribute("id", "answerSet");
+
     //create answers
-    answerCounter -= 4;
+    answerCounter -= 8;
     for (var i = 1; i < 5; i++) {
-        document.getElementById("question" + questionCounter).innerHTML += "<p id='x'></p>";
+        answerCounter++;
+        document.getElementById("answerSet").innerHTML += "<p id='x'></p>";
         document.getElementById("x").setAttribute("class", "answers");
         document.getElementById("x").setAttribute("onclick", "checkAnswerFunc(this.id);");
         document.getElementById("x").setAttribute("id", ("answer" + answerCounter));
-        document.getElementById("question" + questionCounter).innerHTML = objQuiz["q" + questionCounter]["question" + questionCounter];
-        answerCounter++;
+        document.getElementById("answer" + answerCounter).innerHTML = objQuiz["q" + questionCounter]["answer" + i];
+        
     }
     
 }
@@ -172,7 +191,7 @@ var modifyQuestion = function () {
 
 var submitQuestion = function () {
 
-    //new Quesiton is saved in objects and then displayed
+    //new Question is saved in objects and then displayed
     objQuiz["q" + questionCounter]["question" + questionCounter] = document.getElementById("newQuestion").value;
     document.getElementById("question" + questionCounter).innerHTML = objQuiz["q" + questionCounter]["question" + questionCounter];
 
@@ -187,42 +206,28 @@ var submitQuestion = function () {
 
 //----------- Check the answer and keep score -----------------
 
-var clickCounter = 1;
+var pageCheck = [];
 var checkAnswerFunc = function (answerId) {
     "use strict";
     
-    if (questionCounter === clickCounter) {
-        switch (answerId) {
-            case "answer4": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
-                totalCounter++;
-                clickCounter++;
-                document.getElementById(answerId).setAttribute("onclick", "");
-                break;
-            case "answer5": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
-                totalCounter++;
-                clickCounter++;
-                document.getElementById(answerId).setAttribute("onclick", "");                
-                break;
-            case "answer11": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
-                totalCounter++;
-                clickCounter++;
-                document.getElementById(answerId).setAttribute("onclick", "");
-                break;
-            case "answer14": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
-                totalCounter++;
-                clickCounter++;
-                document.getElementById(answerId).setAttribute("onclick", "");
-                break;
-            case "answer18": document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
-                totalCounter++;
-                clickCounter++;
-                document.getElementById(answerId).setAttribute("onclick", "");
-                break;
-            default: document.getElementById("checkAnswer").innerHTML = "Wrong!";
-                document.getElementById("checkAnswer").style.color = "red";
-                document.getElementById(answerId).setAttribute("onclick", "");
-                clickCounter++;
+    if (pageCheck.indexOf(questionCounter) === -1) {
+        if (answerId === "answer4" ||
+            answerId === "answer5" ||
+            answerId === "answer11" ||
+            answerId === "answer14" ||
+            answerId === "answer18") {
+
+            document.getElementById("checkAnswer").innerHTML = "Correct! Awesome!";
+                    totalCounter++;
+                    pageCheck.push(questionCounter);
+                    document.getElementById(answerId).setAttribute("onclick", ""); //still need this?
+        } else {
+            document.getElementById("checkAnswer").innerHTML = "Wrong!! HA!";
+                    document.getElementById("checkAnswer").style.color = "red";
+                    document.getElementById(answerId).setAttribute("onclick", ""); //still need this?
+                    pageCheck.push(questionCounter);
         }
+        
     }
     else { alert("You have already answered. Click the Next button for the next question");}
 }
