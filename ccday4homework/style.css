@@ -148,3 +148,9 @@ html {
 img {
     margin-bottom: 20px;
 }
+
+#aside {
+    float: right;
+    border: 3px double white;
+    border-radius: 10px;
+}

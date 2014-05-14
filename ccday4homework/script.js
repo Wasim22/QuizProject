@@ -49,7 +49,7 @@ Question.prototype = protoQuestion;
         
 
     //------===========----- DIPLAY questions and answers --------==================---------
-
+    
     var totalCounter = 0;
     var answerCounter = 0;
     var questionCounter = 0;
@@ -77,6 +77,12 @@ Question.prototype = protoQuestion;
         document.getElementById("checkAnswer").innerHTML = "";
         document.getElementById("checkAnswer").style.color = "green";
 
+        // startscreen be gone
+        if (document.getElementById("startscreen")) {
+            var div = document.getElementById("startscreen");
+            div.parentElement.removeChild(div);
+        }
+        
         //create question div
         document.getElementById("main").innerHTML = "<div id='x'></div>";
         document.getElementById("x").setAttribute("class", "question");
@@ -89,20 +95,22 @@ Question.prototype = protoQuestion;
         document.getElementById("question" + questionCounter).innerHTML += "<span id='author'></span>"
         document.getElementById("author").innerHTML = "Submitted by: " + questionArray[questionCounter-1]["Author"];
 
-        //// modify question button
-        //document.getElementById("main").innerHTML += "<div id='modifyDiv'></div>";
-        //document.getElementById("modifyDiv").innerHTML = "<button id='modifyButton'>Modify quesion</button>";
-        //document.getElementById("modifyButton").setAttribute("onclick", "modifyQuestion();");
-
+        // modify question button
+        //document.getElementById("signin").style.display = "none";
+                
         // hide the start button
-        document.getElementById("start").style.display = "none";
+        //document.getElementById("start").style.display = "none";
 
-        // hide the sign up text
-        document.getElementById("firstPageText1").style.display = "none";
-        document.getElementById("firstPageText2").style.display = "none";
+        //// hide the sign up text
+        //if (!username) {
+        //    document.getElementById("firstPageText1").style.display = "none";
+        //    document.getElementById("firstPageText2").style.display = "none";
+        //    document.getElementById("firstPageText3").style.display = "none";
+        //}
+        
 
-        // Delete the sign up botton
-        document.getElementById("signup").style.display = "none";
+        //// Delete the sign up botton
+        //document.getElementById("signup").style.display = "none";
 
         // show the next button
         document.getElementById("next").style.visibility = "visible";
@@ -263,7 +271,7 @@ Question.prototype = protoQuestion;
         document.getElementById("firstPageText3").style.display = "none";
         // hide start button
         document.getElementById("start").style.display = "none";
-        // hid sign in button
+        // hide sign in button
         document.getElementById("signin").style.display = "none";
     }
 
@@ -280,12 +288,12 @@ Question.prototype = protoQuestion;
         localStorage.setItem("password", password);
         document.getElementById("startscreen").setAttribute("align", "center");
         document.getElementById("startscreen").style.margin = "20% auto auto auto";
-        document.getElementById("startscreen").innerHTML = "Thank you for signing up. Click the button below to sign in.<br /><br />";
+        document.getElementById("startscreen").innerHTML = "<h1>Thank you for signing up.</h1><p>Click the button below to sign in.</p><br /><br />";
         // display SIGN IN button => signin()
         document.getElementById("startscreen").innerHTML += "<button id='sign in' onclick='signin()' class='button'>Sign in</button>";
     }
 
-//-----------------SIGN IN ----------------------------------------
+//-----------------SIGN IN ------signin()----------------------------------
 
     var signin = function () {
         document.getElementById("startscreen").setAttribute("align", "center");
@@ -299,20 +307,25 @@ Question.prototype = protoQuestion;
         document.getElementById("startscreen").innerHTML += "Enter password " + "<input type='password' id='password'><br /><br />";
         // display SIGN IN button => verify()
         document.getElementById("startscreen").innerHTML += "<button id='sign in' onclick='verify()' class='button'>Sign in</button>";
+        
     }
 
     var verify = function () {
+        // read username and password entered and save them as variables
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
 
+        // check to see if username and password are correct
         if (localStorage.getItem("username") === username &&
             localStorage.getItem("password") === password) {
-            document.getElementById("startscreen").innerHTML = "Thank you for signing in. Click to the button below to start your quiz.<br /><br />";
+            document.getElementById("startscreen").innerHTML = "<h1>Thank you for signing in.</h1><p>Click the button below to start the quiz.</p><br /><br />";
             document.getElementById("startscreen").innerHTML += "<div id='start' onclick='createQA();' class='button'>Start</div>";
         } else {
             document.getElementById("username").value = "";
             document.getElementById("password").value = "";
-            document.getElementById("startscreen").innerHTML += "<br />Login failed. Please try again";
+            document.getElementById("startscreen").innerHTML += "<br /><p id='fail' style='color: red'></p><p id='fail2'></p>";
+            document.getElementById("fail").innerHTML = "Login failed.";
+            document.getElementById("fail2").innerHTML = "Please try again.";
         }
         
     }
