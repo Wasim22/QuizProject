@@ -82,6 +82,10 @@ Question.prototype = protoQuestion;
             var div = document.getElementById("startscreen");
             div.parentElement.removeChild(div);
         }
+
+        // create nav bar
+        document.getElementById("nav").innerHTML = "<li onclick='signup();' class='button'>Sign up</li>";
+        document.getElementById("nav").innerHTML += "<li onclick='signin();' class='button'>Sign in</li>";
         
         //create question div
         document.getElementById("main").innerHTML = "<div id='x'></div>";
@@ -253,8 +257,8 @@ Question.prototype = protoQuestion;
 //-----------------SIGN UP FORM-------signup()---------------------------------
 
     var signup = function () {
-        //turn the sign up button to yellow
-        document.getElementById("signup").style.background = "yellow";
+        //turn the sign up button to gold
+        document.getElementById("signup").style.background = "gold";
         //
         document.getElementById("startscreen").innerHTML += "<form id='signupform'><form>";
         // display username field

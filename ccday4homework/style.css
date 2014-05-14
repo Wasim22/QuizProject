@@ -7,7 +7,21 @@ html {
     color: white;
 }
 
+.header {
+    margin: 0 0 3em 0;
+    float: right;
+    list-style: none;
+    align-self: center;
+    width: 100%;
+}
 
+.header li {
+    float: right;
+}
+
+.header li:hover {
+    background-color: gold;
+}
 
 /*Buttons*/
 .button {        
@@ -28,7 +42,7 @@ html {
 }
 
 .button:hover {
-    background-color: #ddd;        
+    background-color: gold;        
     background-image: linear-gradient(top, #fafafa, #ddd);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafafa', EndColorStr='#dddddd');        
 }
@@ -64,10 +78,18 @@ html {
     margin-top: 5%;
 }
 
+#next:before {
+    content: "\2192";
+}
+
 #previous {
     float: left;
     margin-left: 15%;
     margin-top: 5%;
+}
+
+#previous:before {
+    content: "\2190";
 }
 
 #signup {
@@ -125,6 +147,10 @@ html {
     /*border: 1px solid black;*/
     border-radius: 15px;
     color: black;
+}
+
+.answers:hover::after {
+    content: "\2714";        
 }
 
 #score {
