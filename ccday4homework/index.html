@@ -8,19 +8,22 @@
     <div id="main"></div>
 
 
-    <div id="start" onclick="createQA();">Start</div>
-
-    <div id="next" class="shadow" onclick="createQA();" style="visibility: hidden">Next</div>
-    <div id="previous" class="shadow" onclick="previous();" style="visibility: hidden">Previous</div>
-
+    <div id="startscreen">
+        <div id="signup" onclick="signup();" class="button">Sign up</div> <span id="firstPageText1"> or</span>
+    <div id="signin" onclick="signin();" class="button">Sign in</div> <span id="firstPageText2">to play, or</span>
+    <div id="start" onclick="createQA();" class="button">Start</div><span id="firstPageText3"> the quiz as a guest.</span>
+</div>
     
 
+    <div id="next" class="button" onclick="createQA();" style="visibility: hidden">Next</div>
+    <div id="previous" class="button" onclick="previous();" style="visibility: hidden">Previous</div>
+    
     <label id="checkAnswer"></label>
     <label id="score"></label>
-    
+
     <meter id="meter" value="0" max="5" style="visibility: hidden;">2 out of 10</meter><br />
     <img id="img" src="" />
-    
+
     <script src="script.js"></script>
 </body>
 </html>
